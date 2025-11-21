@@ -87,14 +87,6 @@ This project implements a Retrieval-Augmented Generation (RAG) chatbot using the
 If not using Dify, the system could be implemented with a fully custom stack using LangChain, LangGraph, and tool-enabled LLM agents. The high-level design is:
 
 ## Architecture Overview (LangGraph)
-Start
-  │
-  ▼
-Assistant Node (Query Classifier)
-  ├─ If query is Population → Population LLM Node → Population Tools → End
-  ├─ If query is Marriage → Marriage LLM Node → Marriage Tools → End
-  ├─ If query is FAQ/general → FAQ LLM Node → End
-  └─ Else → Refusal / Clarifying Question → End
   
 1. Assistant Node (Query Classifier)
 
