@@ -1,0 +1,743 @@
+app:
+  description: ''
+  icon: face_with_monocle
+  icon_background: '#FFEAD5'
+  mode: advanced-chat
+  name: DOSM-FAQ-Fariq
+  use_icon_as_answer_icon: false
+dependencies:
+- current_identifier: null
+  type: marketplace
+  value:
+    marketplace_plugin_unique_identifier: langgenius/openai:0.2.7@9031bbf9b37d9f6341a20c78a8bd18d686afd3ff627545496c3557705419d084
+    version: null
+kind: app
+version: 0.5.0
+workflow:
+  conversation_variables: []
+  environment_variables: []
+  features:
+    file_upload:
+      allowed_file_extensions:
+      - .JPG
+      - .JPEG
+      - .PNG
+      - .GIF
+      - .WEBP
+      - .SVG
+      allowed_file_types:
+      - image
+      allowed_file_upload_methods:
+      - local_file
+      - remote_url
+      enabled: false
+      fileUploadConfig:
+        audio_file_size_limit: 50
+        batch_count_limit: 5
+        file_size_limit: 15
+        image_file_size_limit: 10
+        video_file_size_limit: 100
+        workflow_file_upload_limit: 10
+      image:
+        enabled: false
+        number_limits: 3
+        transfer_methods:
+        - local_file
+        - remote_url
+      number_limits: 3
+    opening_statement: ''
+    retriever_resource:
+      enabled: false
+    sensitive_word_avoidance:
+      enabled: false
+    speech_to_text:
+      enabled: false
+    suggested_questions: []
+    suggested_questions_after_answer:
+      enabled: false
+    text_to_speech:
+      enabled: false
+      language: ''
+      voice: ''
+  graph:
+    edges:
+    - data:
+        sourceType: start
+        targetType: question-classifier
+      id: 1711528708197-1711528709608
+      source: '1711528708197'
+      sourceHandle: source
+      target: '1711528709608'
+      targetHandle: target
+      type: custom
+    - data:
+        sourceType: question-classifier
+        targetType: knowledge-retrieval
+      id: 1711528709608-1711528768556
+      source: '1711528709608'
+      sourceHandle: '1711528736036'
+      target: '1711528768556'
+      targetHandle: target
+      type: custom
+    - data:
+        sourceType: question-classifier
+        targetType: knowledge-retrieval
+      id: 1711528709608-1711528770201
+      source: '1711528709608'
+      sourceHandle: '1711528736549'
+      target: '1711528770201'
+      targetHandle: target
+      type: custom
+    - data:
+        isInLoop: false
+        sourceType: llm
+        targetType: answer
+      id: 17637111515850-source-1711528835179-target
+      source: '17637111515850'
+      sourceHandle: source
+      target: '1711528835179'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInLoop: false
+        sourceType: knowledge-retrieval
+        targetType: code
+      id: 1711528768556-source-1763715119643-target
+      source: '1711528768556'
+      sourceHandle: source
+      target: '1763715119643'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInLoop: false
+        sourceType: code
+        targetType: code
+      id: 1763715119643-source-1763710201006-target
+      source: '1763715119643'
+      sourceHandle: source
+      target: '1763710201006'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInLoop: false
+        sourceType: code
+        targetType: llm
+      id: 1763710201006-source-17637102568280-target
+      source: '1763710201006'
+      sourceHandle: source
+      target: '17637102568280'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInLoop: false
+        sourceType: llm
+        targetType: answer
+      id: 17637102568280-source-1711528833796-target
+      source: '17637102568280'
+      sourceHandle: source
+      target: '1711528833796'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInLoop: false
+        sourceType: knowledge-retrieval
+        targetType: code
+      id: 1711528770201-source-1763718106544-target
+      source: '1711528770201'
+      sourceHandle: source
+      target: '1763718106544'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInLoop: false
+        sourceType: code
+        targetType: code
+      id: 1763718106544-source-1763711118475-target
+      source: '1763718106544'
+      sourceHandle: source
+      target: '1763711118475'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInLoop: false
+        sourceType: code
+        targetType: llm
+      id: 1763711118475-source-17637111515850-target
+      source: '1763711118475'
+      sourceHandle: source
+      target: '17637111515850'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInLoop: false
+        sourceType: question-classifier
+        targetType: answer
+      id: 1711528709608-1711528737066-1763722256399-target
+      source: '1711528709608'
+      sourceHandle: '1711528737066'
+      target: '1763722256399'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    nodes:
+    - data:
+        desc: Define the initial parameters for launching a workflow
+        selected: false
+        title: Start
+        type: start
+        variables: []
+      height: 117
+      id: '1711528708197'
+      position:
+        x: 0
+        y: 83
+      positionAbsolute:
+        x: 0
+        y: 83
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 242
+    - data:
+        classes:
+        - id: '1711528736036'
+          name: Question related to population
+        - id: '1711528736549'
+          name: Questions related to marriage
+        - id: '1711528737066'
+          name: Other questions
+        desc: 'Define the classification conditions of user questions, LLM can define
+          how the conversation progresses based on the classification description. '
+        instructions: ''
+        model:
+          completion_params:
+            frequency_penalty: 0
+            max_tokens: 512
+            presence_penalty: 0
+            temperature: 0.7
+            top_p: 1
+          mode: chat
+          name: gpt-3.5-turbo
+          provider: langgenius/openai/openai
+        query_variable_selector:
+        - '1711528708197'
+        - sys.query
+        selected: false
+        title: Question Classifier
+        topics: []
+        type: question-classifier
+      height: 284
+      id: '1711528709608'
+      position:
+        x: 342
+        y: 0
+      positionAbsolute:
+        x: 342
+        y: 0
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 242
+    - data:
+        dataset_ids:
+        - y3tcqOF/76JNgagdrzAxNk3WZqciqIBR+WecxSlS4SrTk7lS/KKMgLId1NIW5RvK
+        desc: 'Retrieve knowledge on after sales SOP. '
+        query_variable_selector:
+        - '1711528708197'
+        - sys.query
+        retrieval_mode: single
+        selected: false
+        single_retrieval_config:
+          model:
+            completion_params: {}
+            mode: chat
+            name: gpt-3.5-turbo
+            provider: openai
+        title: 'Knowledge Retrieval '
+        type: knowledge-retrieval
+      dragging: false
+      height: 118
+      id: '1711528768556'
+      position:
+        x: 684
+        y: 36
+      positionAbsolute:
+        x: 684
+        y: 36
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 242
+    - data:
+        dataset_ids:
+        - 9Yr5GRLocViP9AgE9uK+e/jgnMymASRPsuSHc1p6yVqo9U+w2SpDEOpTrItmBQEo
+        desc: 'Retrieval knowledge about out products. '
+        query_variable_selector:
+        - '1711528708197'
+        - sys.query
+        retrieval_mode: single
+        selected: false
+        single_retrieval_config:
+          model:
+            completion_params: {}
+            mode: chat
+            name: gpt-3.5-turbo
+            provider: openai
+        title: 'Knowledge Retrieval '
+        type: knowledge-retrieval
+      dragging: false
+      height: 134
+      id: '1711528770201'
+      position:
+        x: 704
+        y: 234
+      positionAbsolute:
+        x: 704
+        y: 234
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 242
+    - data:
+        answer: '{{#1763710201006.formatted_context#}}'
+        desc: ''
+        selected: false
+        title: Answer 2
+        type: answer
+        variables:
+        - value_selector:
+          - '1711528802931'
+          - text
+          variable: text
+      dragging: false
+      height: 102
+      id: '1711528833796'
+      position:
+        x: 2052
+        y: 44
+      positionAbsolute:
+        x: 2052
+        y: 44
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 242
+    - data:
+        answer: '{{#1763711118475.formatted_context#}}'
+        desc: ''
+        selected: false
+        title: Answer 3
+        type: answer
+        variables:
+        - value_selector:
+          - '1711528815414'
+          - text
+          variable: text
+      dragging: false
+      height: 102
+      id: '1711528835179'
+      position:
+        x: 2072
+        y: 250
+      positionAbsolute:
+        x: 2072
+        y: 250
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 242
+    - data:
+        code: "def main(cleaned_docs: list):\n    \"\"\"\n    Converts cleaned population\
+          \ docs into polished, human-readable sentences for LLM context.\n    \"\"\
+          \"\n    from collections import defaultdict\n\n    formatted_context = []\n\
+          \n    # Organize by date → sex → ethnicity → list of (age, population)\n\
+          \    data_by_group = defaultdict(lambda: defaultdict(lambda: defaultdict(list)))\n\
+          \n    for doc in cleaned_docs:\n        content = doc.get(\"content\", \"\
+          \")\n        if not content:\n            continue\n        parts = content.split(\"\
+          ;\")\n\n        # Depending on cleaning node, content can be either:\n \
+          \       # date;sex;age;population  (if ethnicity was \"overall\")\n    \
+          \    # date;sex;age;ethnicity;population\n        if len(parts) == 4:\n\
+          \            date, sex, age, pop = parts\n            eth = None\n     \
+          \   elif len(parts) == 5:\n            date, sex, age, eth, pop = parts\n\
+          \        else:\n            continue\n\n        data_by_group[date][sex][eth].append((age,\
+          \ float(pop)))\n\n    # Generate polished sentences\n    for date in sorted(data_by_group.keys()):\n\
+          \        for sex in data_by_group[date]:\n            for eth in data_by_group[date][sex]:\n\
+          \                age_list = sorted(data_by_group[date][sex][eth], key=lambda\
+          \ x: x[0])\n                # create readable sentence per group\n     \
+          \           if eth:\n                    prefix = f\"{sex} population of\
+          \ {eth}\"\n                else:\n                    prefix = f\"{sex}\
+          \ population\"\n\n                for age, pop in age_list:\n          \
+          \          sentence = f\"On {date}, the {prefix} aged {age} numbered {pop:,.1f}\
+          \ thousand. [Population Dataset]\"\n                    formatted_context.append(sentence)\n\
+          \n                # Add total per group\n                total_pop = sum(p\
+          \ for _, p in age_list)\n                if eth:\n                    total_sentence\
+          \ = f\"The total {sex} population of {eth} on {date} was {total_pop:,.1f}\
+          \ thousand. [Population Dataset]\"\n                else:\n            \
+          \        total_sentence = f\"The total {sex} population on {date} was {total_pop:,.1f}\
+          \ thousand. [Population Dataset]\"\n                formatted_context.append(total_sentence)\n\
+          \n    return {\"formatted_context\": \"\\n\".join(formatted_context)}\n"
+        code_language: python3
+        outputs:
+          formatted_context:
+            children: null
+            type: string
+        selected: false
+        title: Code
+        type: code
+        variables:
+        - value_selector:
+          - '1763715119643'
+          - cleaned_docs
+          value_type: string
+          variable: cleaned_docs
+      height: 52
+      id: '1763710201006'
+      position:
+        x: 1368
+        y: 69
+      positionAbsolute:
+        x: 1368
+        y: 69
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 242
+    - data:
+        context:
+          enabled: true
+          variable_selector:
+          - '1711528768556'
+          - result
+        desc: ''
+        memory:
+          role_prefix:
+            assistant: ''
+            user: ''
+          window:
+            enabled: false
+            size: 50
+        model:
+          completion_params:
+            frequency_penalty: 0
+            max_tokens: 512
+            presence_penalty: 0
+            temperature: 0.7
+            top_p: 1
+          mode: chat
+          name: gpt-3.5-turbo
+          provider: langgenius/openai/openai
+        prompt_template:
+        - id: 4f06c19b-355d-4d26-902c-79e11e4ac6bd
+          role: system
+          text: 'Use the following context as your learned knowledge, inside <context></context>
+            XML tags.
+
+            <context>
+
+            {{formatted_context}}
+
+            </context>
+
+            Instructions:
+
+            - Read all the information in the context.
+
+            - Summarize the relevant data into **one concise sentence** that answers
+            the user’s question.
+
+            - Include **numbers and dates**.
+
+            - If the question is unclear or the answer is not in the context, say
+            "I don''t know."
+
+            - Answer in the **same language** as the user''s question.
+
+            '
+        selected: false
+        title: LLM (1)
+        type: llm
+        variables: []
+        vision:
+          enabled: false
+      height: 88
+      id: '17637102568280'
+      position:
+        x: 1710
+        y: 51
+      positionAbsolute:
+        x: 1710
+        y: 51
+      selected: true
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 242
+    - data:
+        code: "def main(result: list):\n    formatted = []\n\n    sex_map = {\"male\"\
+          : \"males\", \"female\": \"females\"}\n\n    for doc in result:\n      \
+          \  row = doc.get(\"content\", \"\")\n        if not row:\n            continue\n\
+          \n        # Parse \"key:value\" pairs\n        try:\n            parts =\
+          \ dict(item.split(\":\") for item in row.split(\";\"))\n        except:\n\
+          \            continue\n\n        date = parts.get(\"date\")\n        sex\
+          \ = parts.get(\"sex\")\n        age = parts.get(\"age\")        # <--- AGE\
+          \ INCLUDED\n        abs_val = parts.get(\"abs\")\n        rate_val = parts.get(\"\
+          rate\")\n\n        # Integer cleanup\n        try:\n            abs_num\
+          \ = int(abs_val.replace(\",\", \"\")) if abs_val else None\n        except:\n\
+          \            abs_num = None\n\n        # Float cleanup\n        try:\n \
+          \           rate_num = float(rate_val) if rate_val else None\n        except:\n\
+          \            rate_num = None\n\n        sex_text = sex_map.get(sex.lower(),\
+          \ sex)\n        age_text = \"overall\" if age == \"overall\" else f\"aged\
+          \ {age}\"\n\n        # Construct sentence\n        if abs_num is not None\
+          \ and rate_num is not None:\n            sentence = (\n                f\"\
+          On {date}, {sex_text} {age_text} had {abs_num} registered marriages \"\n\
+          \                f\"with a marriage rate of {rate_num} per 1000 unmarried\
+          \ {sex_text}. \"\n                f\"[Marriage Dataset]\"\n            )\n\
+          \        elif abs_num is not None:\n            sentence = (\n         \
+          \       f\"On {date}, {sex_text} {age_text} had {abs_num} registered marriages.\
+          \ \"\n                f\"[Marriage Dataset]\"\n            )\n        else:\n\
+          \            continue\n\n        formatted.append(sentence)\n\n    return\
+          \ {\"formatted_context\": \"\\n\".join(formatted)}\n"
+        code_language: python3
+        outputs:
+          formatted_context:
+            children: null
+            type: string
+        selected: false
+        title: Code 2
+        type: code
+        variables:
+        - value_selector:
+          - '1763718106544'
+          - cleaned_docs
+          value_type: array[object]
+          variable: result
+      height: 52
+      id: '1763711118475'
+      position:
+        x: 1388
+        y: 275
+      positionAbsolute:
+        x: 1388
+        y: 275
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 242
+    - data:
+        context:
+          enabled: true
+          variable_selector:
+          - '1711528770201'
+          - result
+        desc: ''
+        memory:
+          role_prefix:
+            assistant: ''
+            user: ''
+          window:
+            enabled: false
+            size: 50
+        model:
+          completion_params:
+            frequency_penalty: 0
+            max_tokens: 512
+            presence_penalty: 0
+            temperature: 0.7
+            top_p: 1
+          mode: chat
+          name: gpt-3.5-turbo
+          provider: langgenius/openai/openai
+        prompt_template:
+        - id: 45e70426-4034-4e15-833c-363bb5bc5f83
+          role: system
+          text: 'Use the following context as your learned knowledge, inside <context></context>
+            XML tags.
+
+            <context>
+
+            {{#1763711118475.formatted_context#}}
+
+            </context>
+
+            When answer to user:
+
+            - If you don''t know, just say that you don''t know.
+
+            - If you don''t know when you are not sure, ask for clarification.
+
+            Avoid mentioning that you obtained the information from the context.
+
+            And answer according to the language of the user''s question.'
+        selected: false
+        title: LLM  (1)
+        type: llm
+        variables: []
+        vision:
+          enabled: false
+      height: 88
+      id: '17637111515850'
+      position:
+        x: 1730
+        y: 257
+      positionAbsolute:
+        x: 1730
+        y: 257
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 242
+    - data:
+        code: "def main(retrieved_docs: list):\n    \"\"\"\n    Cleans retrieved population\
+          \ data:\n    - Keeps ONLY the Top-1 document based on vector score\n   \
+          \ - Removes invalid age rows (non-5-year or 'overall')\n    - Normalizes\
+          \ labels\n    - Produces cleaned 'content'\n    \"\"\"\n    import re\n\n\
+          \    if not retrieved_docs:\n        return {\"cleaned_docs\": []}\n\n \
+          \   # ---- KEEP ONLY TOP-1 BASED ON SCORE ----\n    # Sort descending by\
+          \ metadata score\n    retrieved_docs = sorted(\n        retrieved_docs,\n\
+          \        key=lambda d: d.get(\"metadata\", {}).get(\"score\", 0),\n    \
+          \    reverse=True\n    )\n\n    top1_doc = retrieved_docs[:1]  # keep only\
+          \ best match\n\n    # ---- CLEANING LOGIC ----\n\n    valid_age_pattern\
+          \ = re.compile(\n        r\"^(0-4|5-9|10-14|15-19|20-24|25-29|30-34|35-39|40-44|45-49|50-54|55-59|60-64|65-69|70-74|75-79|80-84|85\\\
+          +)$\"\n    )\n\n    sex_map = {\"both\": \"both sexes\", \"male\": \"male\"\
+          , \"female\": \"female\"}\n    ethnicity_map = {\n        \"overall\": \"\
+          all ethnic groups\",\n        \"bumi_malay\": \"Bumi Malay\",\n        \"\
+          bumi_other\": \"other Bumiputera\",\n        \"chinese\": \"Chinese\",\n\
+          \        \"indian\": \"Indian\",\n        \"other_citizen\": \"other citizens\"\
+          ,\n        \"other_noncitizen\": \"non-citizen residents\"\n    }\n\n  \
+          \  cleaned_docs = []\n\n    for doc in top1_doc:\n        content = doc.get(\"\
+          content\", \"\")\n        if not content:\n            continue\n\n    \
+          \    try:\n            parts = dict(item.split(\":\", 1) for item in content.split(\"\
+          ;\"))\n        except:\n            continue\n\n        age = parts.get(\"\
+          age\", \"\").strip()\n        if not valid_age_pattern.match(age):\n   \
+          \         continue  # skip invalid row\n\n        sex = parts.get(\"sex\"\
+          , \"\").strip()\n        eth = parts.get(\"ethnicity\", \"\").strip()\n\
+          \        date = parts.get(\"date\", \"\").strip()\n        pop = parts.get(\"\
+          population\", \"\").strip()\n\n        sex_text = sex_map.get(sex.lower(),\
+          \ sex)\n        eth_text = ethnicity_map.get(eth.lower(), eth)\n\n     \
+          \   # nicer formatting: remove unnecessary \"overall\"\n        if eth.lower()\
+          \ == \"overall\":\n            clean_content = f\"{date};{sex_text};{age};{pop}\"\
+          \n        else:\n            clean_content = f\"{date};{sex_text};{age};{eth_text};{pop}\"\
+          \n\n        cleaned_docs.append({\n            \"content\": clean_content,\n\
+          \            \"metadata\": doc.get(\"metadata\", {}),\n            \"title\"\
+          : doc.get(\"title\", \"\")\n        })\n\n    return {\"cleaned_docs\":\
+          \ cleaned_docs}\n"
+        code_language: python3
+        outputs:
+          cleaned_docs:
+            children: null
+            type: array[object]
+        selected: false
+        title: Code 3
+        type: code
+        variables:
+        - value_selector:
+          - '1711528768556'
+          - result
+          value_type: array[object]
+          variable: retrieved_docs
+      height: 52
+      id: '1763715119643'
+      position:
+        x: 1026
+        y: 69
+      positionAbsolute:
+        x: 1026
+        y: 69
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 242
+    - data:
+        code: "def main(retrieved_docs: list):\n    \"\"\"\n    Cleans retrieved marriage\
+          \ data:\n    - Removes invalid age rows (non-standard or 'all')\n    - Normalizes\
+          \ text for better readability\n    - Produces cleaned 'content' ready for\
+          \ preprocessing\n    \"\"\"\n    import re\n\n    # Define valid age groups\n\
+          \    valid_age_pattern = re.compile(\n        r\"^(<\\s*\\d+|\\d{1,2}-\\\
+          d{1,2}|\\d{1,2}\\+|all|overall)$\"\n    )\n\n    sex_map = {\"male\": \"\
+          male\", \"female\": \"female\"}\n\n    cleaned_docs = []\n\n    for doc\
+          \ in retrieved_docs:\n        content = doc.get(\"content\", \"\")\n   \
+          \     if not content:\n            continue\n        try:\n            parts\
+          \ = dict(item.split(\":\", 1) for item in content.split(\";\"))\n      \
+          \  except:\n            continue\n\n        age = parts.get(\"age\", \"\"\
+          ).strip().lower()\n        if not valid_age_pattern.match(age):\n      \
+          \      continue  # skip invalid age rows\n\n        sex = parts.get(\"sex\"\
+          , \"\").strip().lower()\n        date = parts.get(\"date\", \"\").strip()\n\
+          \        abs_val = parts.get(\"abs\", \"\").strip()\n        rate_val =\
+          \ parts.get(\"rate\", \"\").strip()\n\n        # Normalize sex\n       \
+          \ sex_text = sex_map.get(sex, sex)\n\n        # Normalize age and create\
+          \ cleaned content\n        if age in [\"all\", \"overall\"]:\n         \
+          \   clean_content = f\"{date};{sex_text};all;{abs_val};{rate_val}\"\n  \
+          \      else:\n            clean_content = f\"{date};{sex_text};{age};{abs_val};{rate_val}\"\
+          \n\n        cleaned_docs.append({\n            \"content\": clean_content,\n\
+          \            \"metadata\": doc.get(\"metadata\", {}),\n            \"title\"\
+          : doc.get(\"title\", \"\")\n        })\n\n    return {\"cleaned_docs\":\
+          \ cleaned_docs}\n\n"
+        code_language: python3
+        outputs:
+          cleaned_docs:
+            children: null
+            type: array[object]
+        selected: false
+        title: Code 4
+        type: code
+        variables:
+        - value_selector:
+          - '1711528770201'
+          - result
+          value_type: array[object]
+          variable: retrieved_docs
+      height: 52
+      id: '1763718106544'
+      position:
+        x: 1046
+        y: 275
+      positionAbsolute:
+        x: 1046
+        y: 275
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 242
+    - data:
+        answer: I'm sorry, I can only answer questions about the selected DOSM dataset.
+        selected: false
+        title: Answer 3
+        type: answer
+        variables: []
+      height: 116
+      id: '1763722256399'
+      position:
+        x: 691.8859879812479
+        y: 514.4021613726925
+      positionAbsolute:
+        x: 691.8859879812479
+        y: 514.4021613726925
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 242
+    viewport:
+      x: -649.5517415383248
+      y: 250.12636196680128
+      zoom: 0.461827768770513
+  rag_pipeline_variables: []
