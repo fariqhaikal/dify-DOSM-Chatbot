@@ -1,0 +1,18 @@
+{"query": "What was the population of Bumi Malay males aged 20-24 in 2025?", "expected_notes": "Should return 855.7 thousand."}
+{"query": "What was the total population of all ethnic groups in Malaysia in 2025?", "expected_notes": "Sum of all ethnicities: 34,231.7 thousand."}
+{"query": "How many females aged 25-29 were there in 2017?", "expected_notes": "Should return 1,507.3 thousand from Population Dataset."}
+{"query": "What was the total female population in 2017?", "expected_notes": "Total female population on 2017-01-01: 4,392.9 thousand."}
+{"query": "How many marriages were registered among females aged 25-29 in 2017?", "expected_notes": "81,555 marriages with rate 142.66 per 1000 unmarried females."}
+{"query": "How many marriages were registered among males aged 30-34 in 2017?", "expected_notes": "Check dataset; return abs and rate if available."}
+{"query": "What was the marriage rate for females aged 20-24 in 2017?", "expected_notes": "57.73 per 1000 unmarried females."}
+{"query": "How many total marriages occurred among females in 2017?", "expected_notes": "203,741 total marriages registered among females."}
+{"query": "What is the population of Chinese males aged 35-39 in 2025?", "expected_notes": "Return value from Population Dataset for 35-39 Chinese males."}
+{"query": "How many marriages were registered among females under 20 in 2017?", "expected_notes": "10,038 marriages with rate 1.99 per 1000 unmarried females."}
+{"query": "What was the total population of other citizens in 2025?", "expected_notes": "234.3 thousand."}
+{"query": "What is the population of all ages for Bumi Other males in 2025?", "expected_notes": "3,779.8 thousand."}
+{"query": "What was the marriage rate for males aged 50-54 in 2017?", "expected_notes": "Check dataset; return rate per 1000 unmarried males if available."}
+{"query": "What was the total male population in 2025?", "expected_notes": "Sum all ethnicities for males: e.g., 17,415 thousand."}
+{"query": "What is the weather in Kuala Lumpur?", "expected_notes": "Should refuse; off-topic query."}
+
+
+
